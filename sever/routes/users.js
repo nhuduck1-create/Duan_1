@@ -1,5 +1,6 @@
 const express = require('express');
 const crypto = require('crypto');
+const mongoose = require('mongoose');
 const User = require('../models/User');
 
 const router = express.Router();
@@ -106,19 +107,53 @@ router.post('/login', async (req, res) => {
 });
 
 // Danh sách người dùng
-router.get('/', async (req, res) => {
+router.get('/list', async (req, res) => {
   try {
-    const users = await User.find().sort({ createdAt: -1 });
-    res.json(buildResponse(true, 'Danh sách người dùng', users.map(sanitizeUser)));
+    const page = Math.max(parseInt(req.query.page || '1', 10), 1);
+    const limit = Math.max(parseInt(req.query.limit || '10', 10), 1);
+    const search = (req.query.search || '').trim();
+    const sortBy = (req.query.sortBy || 'createdAt');
+    const order = (req.query.order || 'desc').toLowerCase() === 'asc' ? 1 : -1;
+
+    const filter = search
+      ? {
+          $or: [
+            { name: { $regex: search, $options: 'i' } },
+            { email: { $regex: search, $options: 'i' } }
+          ]
+        }
+      : {};
+
+    const total = await User.countDocuments(filter);
+    const users = await User.find(filter)
+      .sort({ [sortBy]: order })
+      .skip((page - 1) * limit)
+      .limit(limit);
+
+    res.json(
+      buildResponse(true, 'Danh sách người dùng', {
+        items: users.map(sanitizeUser),
+        total,
+        page,
+        limit,
+        pages: Math.ceil(total / limit),
+        sort: { by: sortBy, order: order === 1 ? 'asc' : 'desc' },
+        search
+      })
+    );
   } catch (error) {
     res.status(500).json(buildResponse(false, error.message));
   }
 });
 
 // Chi tiết người dùng
-router.get('/:id', async (req, res) => {
+router.get('/detail/:id', async (req, res) => {
   try {
-    const user = await User.findById(req.params.id);
+    const { id } = req.params;
+    if (!mongoose.Types.ObjectId.isValid(id)) {
+      return res.status(400).json(buildResponse(false, 'ID không hợp lệ'));
+    }
+    const user = await User.findById(id);
     if (!user) {
       return res.status(404).json(buildResponse(false, 'Không tìm thấy người dùng'));
     }
