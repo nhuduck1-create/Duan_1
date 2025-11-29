@@ -37,10 +37,11 @@ public class AdminOrdersAdapter extends RecyclerView.Adapter<AdminOrdersAdapter.
     public void onBindViewHolder(@NonNull OrderViewHolder holder, int position) {
         OrderRequest order = list.get(position);
 
-        holder.tvId.setText(order.getId());
-        holder.tvUser.setText(order.getUser().getName());
-        holder.tvStatus.setText(order.getStatus());
-        holder.tvTotal.setText(order.getTotal() + " VNĐ");
+        holder.tvId.setText(order.getProductId());
+        holder.tvUser.setText(String.valueOf(order.getUserId()));
+        holder.tvStatus.setText("Đã đặt"); // Vì OrderRequest không có status
+        holder.tvTotal.setText(order.getQuantity() + " sản phẩm");
+
     }
 
     @Override
