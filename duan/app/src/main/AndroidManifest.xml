@@ -35,7 +35,28 @@
 
         <activity
             android:name=".MainActivity"
+<<<<<<< HEAD
             android:exported="false" />
+=======
+            android:exported="false"
+            android:theme="@style/Theme.Duan" />
+        <activity
+            android:name=".ui.orders.OrdersActivity"
+            android:exported="false"
+            android:theme="@style/Theme.Duan" />
+        <activity
+            android:name=".ui.users.UsersActivity"
+            android:exported="false"
+            android:theme="@style/Theme.Duan" />
+        <activity
+            android:name=".ui.users.detail.UserDetailActivity"
+            android:exported="false"
+            android:theme="@style/Theme.Duan" />
+        <activity
+            android:name=".ui.orders.OrderDetailActivity"
+            android:exported="false"
+            android:theme="@style/Theme.Duan" />
+>>>>>>> 3811d5da0d3c81792e2813b505f908b7baf75a76
     </application>
 
 </manifest>

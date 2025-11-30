@@ -1,5 +1,10 @@
+<<<<<<< HEAD
 <androidx.coordinatorlayout.widget.CoordinatorLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
+=======
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+>>>>>>> 3811d5da0d3c81792e2813b505f908b7baf75a76
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -34,6 +39,7 @@
                 android:textStyle="bold"
                 android:textColor="@color/black"
                 android:gravity="center" />
+<<<<<<< HEAD
 
         </LinearLayout>
     </com.google.android.material.appbar.AppBarLayout>
@@ -46,5 +52,51 @@
         android:padding="16dp" />
 
 
+=======
+        </LinearLayout>
+    </com.google.android.material.appbar.AppBarLayout>
+
+    <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+        android:id="@+id/swipe_refresh"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rv_orders"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:padding="16dp"
+                android:clipToPadding="false" />
+
+            <LinearLayout
+                android:id="@+id/view_empty"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:orientation="vertical"
+                android:visibility="gone">
+
+                <ImageView
+                    android:layout_width="72dp"
+                    android:layout_height="72dp"
+                    android:src="@android:drawable/ic_menu_agenda"
+                    android:tint="@color/dark_gray" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Chưa có đơn hàng"
+                    android:textColor="@color/dark_gray"
+                    android:textSize="16sp"
+                    android:layout_marginTop="12dp" />
+            </LinearLayout>
+        </FrameLayout>
+    </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
+>>>>>>> 3811d5da0d3c81792e2813b505f908b7baf75a76
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

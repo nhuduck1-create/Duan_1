@@ -7,6 +7,11 @@ import ph61167.dunghn.duan.data.model.AdminOrderEntity;
 import ph61167.dunghn.duan.data.model.MyNotification;
 import ph61167.dunghn.duan.data.model.OrderRequest;
 import ph61167.dunghn.duan.data.model.Product;
+import ph61167.dunghn.duan.data.model.Order;
+import ph61167.dunghn.duan.data.model.User;
+import ph61167.dunghn.duan.data.remote.response.UsersListData;
+import ph61167.dunghn.duan.data.model.OrderDetail;
+import ph61167.dunghn.duan.data.remote.response.OrdersListData;
 import ph61167.dunghn.duan.data.remote.request.LoginRequest;
 import ph61167.dunghn.duan.data.remote.request.RegisterRequest;
 import ph61167.dunghn.duan.data.remote.response.AuthData;
@@ -26,6 +31,25 @@ public interface ApiService {
     // ---------- PRODUCTS ----------
     @GET("products")
     Call<BaseResponse<List<Product>>> getProducts();
+<<<<<<< HEAD
+=======
+
+    @GET("orders")
+    Call<BaseResponse<List<Order>>> getOrders();
+
+    @GET("users/list")
+    Call<BaseResponse<UsersListData>> getUsersList();
+
+    @GET("users/detail/{id}")
+    Call<BaseResponse<User>> getUserDetail(@retrofit2.http.Path("id") String id);
+
+    @GET("orders/detail/{id}")
+    Call<BaseResponse<OrderDetail>> getOrderDetail(@retrofit2.http.Path("id") String id);
+
+    @GET("orders/user/{id}/list")
+    Call<BaseResponse<OrdersListData>> getUserOrders(@retrofit2.http.Path("id") String userId);
+}
+>>>>>>> 3811d5da0d3c81792e2813b505f908b7baf75a76
 
     // ---------- ORDERS ----------
     @POST("orders")
